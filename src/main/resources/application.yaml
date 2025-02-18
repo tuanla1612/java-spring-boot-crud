@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/crud_java?useSSL=false
+    username: admin
+    password: 911291
+
+#JPA Settings
+  jpa.hibernate.ddl_auto: create
