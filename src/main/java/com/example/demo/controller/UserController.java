@@ -1,7 +1,10 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.User;
+import com.example.demo.response.ResponseHandler;
 import com.example.demo.service.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,9 +19,9 @@ public class UserController {
     }
 
     @GetMapping("{userId}")
-    public User getUserDetails(@PathVariable("userId") String userId)
+    public ResponseEntity<Object> getUserDetails(@PathVariable("userId") String userId)
     {
-        return userService.getUserDetails(userId);
+        return ResponseHandler.responseBuilder("Request user detail is here", HttpStatus.OK, userService.getUserDetails(userId));
     }
 
     @GetMapping()
