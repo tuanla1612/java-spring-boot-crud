@@ -1,25 +1,52 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.sql.Timestamp;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
+    public enum UserStatus {
+        ACTIVE, INACTIVE, BANNED
+    }
+
     @Id
     private String userId;
-    private String name;
+
+    private String fullName;
     private String email;
-    private String telephone;
-    private Integer age;
+    private String passwordHash;
+    private String phoneNumber;
+
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
+
+    @CreationTimestamp
+    private Timestamp createdAt;
+
+    @UpdateTimestamp
+    private Timestamp updatedAt;
 
     public User() {}
 
-    public User(String userId, String name, String email, String telephone, Integer age) {
+    public User(String userId, String fullName, String email, String passwordHash, String phoneNumber, UserStatus status) {
         this.userId = userId;
-        this.name = name;
+        this.fullName = fullName;
         this.email = email;
-        this.telephone = telephone;
-        this.age = age;
+        this.passwordHash = passwordHash;
+        this.phoneNumber = phoneNumber;
+        this.status = status;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getUserId() {
@@ -30,22 +57,6 @@ public class User {
         this.userId = userId;
     }
 
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -54,15 +65,37 @@ public class User {
         this.email = email;
     }
 
-    public Integer getAge() {
-        return age;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public UserStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(UserStatus status) {
+        this.status = status;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
 
 
 }
