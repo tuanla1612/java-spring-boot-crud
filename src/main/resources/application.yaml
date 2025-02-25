@@ -4,5 +4,10 @@ spring:
     username: admin
     password: 911291
 
-#JPA Settings
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+
+
+  #JPA Settings
   jpa.hibernate.ddl_auto: create
