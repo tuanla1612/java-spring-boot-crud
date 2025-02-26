@@ -1,8 +1,6 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
@@ -17,6 +15,7 @@ public class Transfer {
     private String receiverWallet;
     private BigDecimal amount;
 
+    @Enumerated(EnumType.STRING)
     private Transaction.TransactionStatus status;
 
     @CreationTimestamp

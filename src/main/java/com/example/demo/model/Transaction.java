@@ -1,8 +1,6 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -17,7 +15,7 @@ public class Transaction {
     }
 
     public enum TransactionStatus {
-        PENDING, COMPLETE, FAILED
+        PENDING, COMPLETED, FAILED
     }
 
     @Id
@@ -25,8 +23,12 @@ public class Transaction {
 
     private String walletId;
 
+    @Enumerated(EnumType.STRING)
     private TransactionType type;
+
     private BigDecimal amount;
+
+    @Enumerated(EnumType.STRING)
     private TransactionStatus status;
 
     @CreationTimestamp
