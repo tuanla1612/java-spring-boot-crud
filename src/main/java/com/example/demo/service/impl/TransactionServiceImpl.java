@@ -7,6 +7,7 @@ import com.example.demo.service.TransactionService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
@@ -18,6 +19,8 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public String createTransaction(Transaction transaction) {
+        UUID transactionId = UUID.randomUUID();
+        transaction.setTransactionId(transactionId.toString());
         transactionRepository.save(transaction);
         return "Successfully created transaction";
     }

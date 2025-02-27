@@ -7,6 +7,7 @@ import com.example.demo.service.TransferService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class TransferServiceImpl implements TransferService {
@@ -18,6 +19,8 @@ public class TransferServiceImpl implements TransferService {
 
     @Override
     public String createTransfer(Transfer transfer) {
+        UUID transferId = UUID.randomUUID();
+        transfer.setTransferId(transferId.toString());
         transferRepository.save(transfer);
         return "Successfully created transfer";
     }

@@ -7,6 +7,7 @@ import com.example.demo.service.WalletService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class WalletServiceImpl implements WalletService {
@@ -17,14 +18,16 @@ public class WalletServiceImpl implements WalletService {
     }
 
     @Override
-    public String createWallet(Wallet user) {
-        walletRepository.save(user);
+    public String createWallet(Wallet wallet) {
+        UUID walletId = UUID.randomUUID();
+        wallet.setUserId(walletId.toString());
+        walletRepository.save(wallet);
         return "Successfully created wallet";
     }
 
     @Override
-    public String updateWallet(Wallet user) {
-        walletRepository.save(user);
+    public String updateWallet(Wallet wallet) {
+        walletRepository.save(wallet);
         return "Successfully updated wallet";
     }
 

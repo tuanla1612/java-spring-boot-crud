@@ -3,6 +3,7 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.sql.Timestamp;
 
@@ -14,11 +15,17 @@ public class User {
     }
 
     @Id
+    @UuidGenerator
     private String userId;
 
     private String fullName;
+
+    @Column(unique = true, nullable = false)
     private String email;
+
     private String passwordHash;
+
+    @Column(unique = true, nullable = false)
     private String phoneNumber;
 
     @Enumerated(EnumType.STRING)
@@ -96,7 +103,5 @@ public class User {
     public Timestamp getUpdatedAt() {
         return updatedAt;
     }
-
-
 }
 

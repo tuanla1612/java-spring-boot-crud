@@ -3,6 +3,7 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -19,6 +20,7 @@ public class Transaction {
     }
 
     @Id
+    @UuidGenerator
     private String transactionId;
 
     private String walletId;

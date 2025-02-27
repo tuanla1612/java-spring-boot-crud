@@ -1,9 +1,8 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.sql.Timestamp;
 
@@ -11,6 +10,7 @@ import java.sql.Timestamp;
 @Table(name = "logs")
 public class Log {
     @Id
+    @UuidGenerator
     private String logId;
     private String userId;
     private String action;

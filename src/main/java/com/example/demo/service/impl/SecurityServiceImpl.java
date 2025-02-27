@@ -7,6 +7,7 @@ import com.example.demo.service.SecurityService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class SecurityServiceImpl implements SecurityService {
@@ -17,14 +18,16 @@ public class SecurityServiceImpl implements SecurityService {
     }
 
     @Override
-    public String createSecurity(Security transfer) {
-        securityRepository.save(transfer);
+    public String createSecurity(Security security) {
+        UUID otpId = UUID.randomUUID();
+        security.setOtpId(otpId.toString());
+        securityRepository.save(security);
         return "Successfully created security";
     }
 
     @Override
-    public String updateSecurity(Security transfer) {
-        securityRepository.save(transfer);
+    public String updateSecurity(Security security) {
+        securityRepository.save(security);
         return "Successfully updated security";
     }
 

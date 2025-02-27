@@ -7,6 +7,7 @@ import com.example.demo.service.LogService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class LogServiceImpl implements LogService {
@@ -17,14 +18,16 @@ public class LogServiceImpl implements LogService {
     }
 
     @Override
-    public String createLog(Log transfer) {
-        logRepository.save(transfer);
+    public String createLog(Log log) {
+        UUID logId = UUID.randomUUID();
+        log.setLogId(logId.toString());
+        logRepository.save(log);
         return "Successfully created log";
     }
 
     @Override
-    public String updateLog(Log transfer) {
-        logRepository.save(transfer);
+    public String updateLog(Log log) {
+        logRepository.save(log);
         return "Successfully updated log";
     }
 

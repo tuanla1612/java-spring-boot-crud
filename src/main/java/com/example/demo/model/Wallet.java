@@ -1,10 +1,9 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -13,6 +12,7 @@ import java.sql.Timestamp;
 @Table(name = "wallets")
 public class Wallet {
     @Id
+    @UuidGenerator
     private String walletId;
 
     private String userId;
