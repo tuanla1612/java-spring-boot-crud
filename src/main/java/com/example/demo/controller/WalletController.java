@@ -30,6 +30,11 @@ public class WalletController {
         return walletService.getAllWallets();
     }
 
+    @GetMapping("/user/{userId}")
+    public List<Wallet> getAllWallets(@PathVariable String userId) {
+        return walletService.getWalletsByUserId(userId);
+    }
+
     @PostMapping
     public String createWallet(@RequestBody Wallet wallet)
     {

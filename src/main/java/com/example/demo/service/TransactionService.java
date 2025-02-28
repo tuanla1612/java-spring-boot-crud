@@ -10,4 +10,5 @@ public interface TransactionService {
     public String deleteTransaction(String transactionId);
     public Transaction getTransactionDetails(String transactionId);
     public List<Transaction> getAllTransactions();
+    public List<Transaction> getTransactionsByWalletId(String walletId);
 }

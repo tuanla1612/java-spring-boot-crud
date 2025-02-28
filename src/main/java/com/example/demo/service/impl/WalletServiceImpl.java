@@ -20,7 +20,7 @@ public class WalletServiceImpl implements WalletService {
     @Override
     public String createWallet(Wallet wallet) {
         UUID walletId = UUID.randomUUID();
-        wallet.setUserId(walletId.toString());
+        wallet.setWalletId(walletId.toString());
         walletRepository.save(wallet);
         return "Successfully created wallet";
     }
@@ -49,5 +49,10 @@ public class WalletServiceImpl implements WalletService {
     @Override
     public List<Wallet> getAllWallets() {
         return walletRepository.findAll();
+    }
+
+    @Override
+    public List<Wallet> getWalletsByUserId(String userId) {
+        return walletRepository.findByUserId(userId);
     }
 }

@@ -10,4 +10,5 @@ public interface WalletService {
     public String deleteWallet(String walletId);
     public Wallet getWalletDetails(String walletId);
     public List<Wallet> getAllWallets();
+    public List<Wallet> getWalletsByUserId(String userId);
 }
