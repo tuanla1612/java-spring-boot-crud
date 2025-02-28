@@ -37,6 +37,6 @@ public class FrontendController {
     public String showWalletPage(Model model, @PathVariable String walletId) {
         model.addAttribute("wallet", walletService.getWalletDetails(walletId));
         model.addAttribute("transactions", transactionService.getTransactionsByWalletId(walletId));
-        return "wallet";
+        return "wallet-detail";
     }
 }
