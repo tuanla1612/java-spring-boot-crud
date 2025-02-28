@@ -25,13 +25,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String createUser(User user) {
+    public User createUser(User user) {
         UUID userId = UUID.randomUUID();
         user.setUserId(userId.toString());
         String hashedPassword = passwordEncoder.encode(user.getPasswordHash());
         user.setPasswordHash(hashedPassword);
-        userRepository.save(user);
-        return "Successfully created user";
+        user.setStatus(User.UserStatus.ACTIVE);
+        return userRepository.save(user);
     }
 
     @Override
@@ -61,8 +61,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean loginUser(LoginRequest loginRequest) {
+    public Optional<User> loginUser(LoginRequest loginRequest) {
         Optional<User> user = userRepository.findByEmail(loginRequest.getEmail());
-        return user.filter(value -> passwordEncoder.matches(loginRequest.getPassword(), value.getPasswordHash())).isPresent();
+        if (user.isPresent() && passwordEncoder.matches(loginRequest.getPassword(), user.get().getPasswordHash())) {
+            return user;
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<User> findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 }

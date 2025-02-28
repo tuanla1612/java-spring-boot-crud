@@ -8,20 +8,20 @@ import com.example.demo.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping( "/user")
 public class UserController {
     private final UserService userService;
 
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    private final JwtTokenUtil jwtTokenUtil;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, JwtTokenUtil jwtTokenUtil) {
         this.userService = userService;
+        this.jwtTokenUtil = jwtTokenUtil;
     }
 
     @GetMapping("{userId}")
@@ -29,6 +29,20 @@ public class UserController {
     {
         return ResponseHandler.responseBuilder("Request user detail is here", HttpStatus.OK, userService.getUserDetails(userId));
     }
+    @GetMapping("/profile")
+    public ResponseEntity<Object> getUserDetailsForProfile(@RequestHeader("Authorization") String authHeader)
+    {
+        String token = authHeader.substring(7);
+        String email = jwtTokenUtil.getUsernameFromToken(token);
+        Optional<User> user = userService.findUserByEmail(email);
+
+        if (user.isPresent()) {
+            return ResponseHandler.responseBuilder("Request user detail is here", HttpStatus.OK, user);
+        } else {
+            return ResponseHandler.responseBuilder("Wrong token!", HttpStatus.UNAUTHORIZED, Optional.empty());
+        }
+    }
+
 
     @GetMapping()
     public List<User> getAllUsers()
@@ -57,20 +71,20 @@ public class UserController {
         return "User deleted successfully";
     }
 
-    @PostMapping("/signup")
-    public String signUp(@RequestBody User user)
+    @PostMapping("/register")
+    public ResponseEntity<Object> register(@RequestBody User user)
     {
-        userService.createUser(user);
-        return "User created successfully";
+        return ResponseHandler.responseBuilder("User created successfully", HttpStatus.OK, userService.createUser(user));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestBody LoginRequest loginRequest) {
-        if (userService.loginUser(loginRequest)) {
+    public ResponseEntity<Object> loginUser(@RequestBody LoginRequest loginRequest) {
+        Optional<User> user = userService.loginUser(loginRequest);
+        if (user.isPresent()) {
             String token = jwtTokenUtil.generateToken(loginRequest.getEmail());
-            return ResponseEntity.ok("Bearer " + token);
+            return ResponseHandler.responseBuilder(token, HttpStatus.OK, user);
         } else {
-            return ResponseEntity.status(401).body("Invalid email or password");
+            return ResponseHandler.responseBuilder("Invalid email or password", HttpStatus.BAD_REQUEST, Optional.empty());
         }
     }
 }

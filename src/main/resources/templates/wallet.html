@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet - eWallet</title>
+</head>
+<body>
+
+<h2>Wallet</h2>
+
+<div>
+    <p><strong>Balance:</strong> <span th:text="${wallet.balance}"></span></p>
+</div>
+
+<form action="/wallet/transfer" method="post">
+    <input type="number" name="amount" placeholder="Amount" required>
+    <button type="submit">Transfer</button>
+</form>
+
+</body>
+</html>
