@@ -39,4 +39,15 @@ public class FrontendController {
         model.addAttribute("transactions", transactionService.getTransactionsByWalletId(walletId));
         return "wallet-detail";
     }
+
+    @GetMapping("/transfer-form")
+    public String showTransferPage() {
+        return "transfer";
+    }
+
+    @GetMapping("/transfer-success")
+    public String showTransferSuccessPage() {
+        return "transfer-success";
+    }
+
 }

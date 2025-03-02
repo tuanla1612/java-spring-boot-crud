@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfer Money - E-Wallet</title>
+    <!-- Link to Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+        }
+
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .alert {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h4>Transfer Money</h4>
+            </div>
+            <div class="card-body">
+                <form id="transferForm">
+                    <div class="mb-3">
+                        <label for="recipient" class="form-label">Recipient's Wallet ID</label>
+                        <input type="text" class="form-control" id="recipient" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="amount" class="form-label">Amount to Transfer</label>
+                        <input type="number" class="form-control" id="amount" min="1" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="note" class="form-label">Note (Optional)</label>
+                        <textarea class="form-control" id="note" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Transfer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Link to Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('transferForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    // Get form values
+    const recipient = document.getElementById('recipient').value;
+    const amount = document.getElementById('amount').value;
+    const note = document.getElementById('note').value;
+
+    // Basic validation
+    if (recipient === '' || amount <= 0) {
+        showAlert('Please fill in all required fields correctly.', 'danger');
+        return;
+    }
+
+    // Clear form
+    document.getElementById('transferForm').reset();
+});
+    </script>
+</body>
+
+</html>
