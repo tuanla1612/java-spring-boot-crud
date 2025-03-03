@@ -35,19 +35,21 @@
             <a href="/transfer-form" class="btn btn-warning w-50">Transfer</a>
         </div>
 
+        <br><br><br><br><br>
+
         <h3 class="text-center mb-4">Transactions history</h3>
 
-<div id="layoutSidenav">
-    <div id="layoutSidenav_content">
-        <main>
-            <div class="container-fluid px-4">
+        <div id="layoutSidenav2">
+            <div id="layoutSidenav_content2">
+                <main>
+                    <div class="container-fluid px-4">
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
                         Transactions history
                     </div>
                     <div class="card-body">
-                        <table id="datatablesSimple">
+                        <table id="datatablesSimple2">
                             <thead>
                             <tr>
                                 <th>Created at</th>
@@ -82,6 +84,61 @@
         </main>
     </div>
 </div>
+
+        <h3 class="text-center mb-4">Transfers history</h3>
+
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                Transactions history
+                            </div>
+                            <div class="card-body">
+                                <table id="datatablesSimple">
+                                    <thead>
+                                    <tr>
+                                        <th>Created at</th>
+                                        <th>Transfer ID</th>
+                                        <th>Sender Wallet ID</th>
+                                        <th>Receiver Wallet ID</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                        <th>Note</th>
+                                    </tr>
+                                    </thead>
+                                    <tfoot>
+                                    <tr>
+                                        <th>Created at</th>
+                                        <th>Transfer ID</th>
+                                        <th>Sender Wallet ID</th>
+                                        <th>Receiver Wallet ID</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                        <th>Note</th>
+                                    </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    <tr th:each="transfer : ${transfers}">
+                                        <td th:text="${transfer.createdAt}"></td>
+                                        <td th:text="${transfer.transferId}"></td>
+                                        <td th:text="${transfer.senderWallet}"></td>
+                                        <td th:text="${transfer.receiverWallet}"></td>
+                                        <td th:text="${transfer.amount}"></td>
+                                        <td th:text="${transfer.status}"></td>
+                                        <td th:text="${transfer.note}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="/assets/js/scripts.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
@@ -94,6 +151,5 @@
             console.log("Wallet ID:", walletId);
             /*]]>*/
         </script>
-    </div></div>
 </body>
 </html>

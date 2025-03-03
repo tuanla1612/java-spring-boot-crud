@@ -10,4 +10,5 @@ public interface TransferService {
     public String deleteTransfer(String transferId);
     public Transfer getTransferDetails(String transferId);
     public List<Transfer> getAllTransfers();
+    public List<Transfer> getTransfersBySenderWallet(String senderWalletId);
 }

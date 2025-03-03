@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.service.TransactionService;
+import com.example.demo.service.TransferService;
 import com.example.demo.service.WalletService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,10 +13,12 @@ public class FrontendController {
 
     private final WalletService walletService;
     private final TransactionService transactionService;
+    private final TransferService transferService;
 
-    public FrontendController(WalletService walletService, TransactionService transactionService) {
+    public FrontendController(WalletService walletService, TransactionService transactionService, TransferService transferService) {
         this.walletService = walletService;
         this.transactionService = transactionService;
+        this.transferService = transferService;
     }
 
     @GetMapping("/login")
@@ -37,6 +40,7 @@ public class FrontendController {
     public String showWalletPage(Model model, @PathVariable String walletId) {
         model.addAttribute("wallet", walletService.getWalletDetails(walletId));
         model.addAttribute("transactions", transactionService.getTransactionsByWalletId(walletId));
+        model.addAttribute("transfers", transferService.getTransfersBySenderWallet(walletId));
         return "wallet-detail";
     }
 

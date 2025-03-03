@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping( "/transfer")
@@ -31,10 +32,10 @@ public class TransferController {
     }
 
     @PostMapping
-    public String createTransfer(@RequestBody Transfer Transfer)
+    public ResponseEntity<Object> createTransfer(@RequestBody Transfer Transfer)
     {
         transferService.createTransfer(Transfer);
-        return "Transfer created successfully";
+        return ResponseHandler.responseBuilder("Transfer created successfully", HttpStatus.OK, Optional.empty());
     }
 
     @PutMapping
