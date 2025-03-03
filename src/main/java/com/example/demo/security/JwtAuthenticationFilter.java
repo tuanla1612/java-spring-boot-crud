@@ -27,7 +27,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         if (token != null && token.startsWith("Bearer ")) {
             token = token.substring(7);
-            try {
                 String username = jwtTokenUtil.getUsernameFromToken(token);
 
                 if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -37,10 +36,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         SecurityContextHolder.getContext().setAuthentication(authentication);
                     }
                 }
-            } catch (Exception e) {
-                response.sendRedirect("/login");
-                return;
-            }
         }
 
         filterChain.doFilter(request, response);

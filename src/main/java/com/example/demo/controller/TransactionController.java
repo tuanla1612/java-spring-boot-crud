@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping( "/transaction")
@@ -31,10 +32,10 @@ public class TransactionController {
     }
 
     @PostMapping
-    public String createTransaction(@RequestBody Transaction transaction)
+    public ResponseEntity<Object> createTransaction(@RequestBody Transaction transaction)
     {
         transactionService.createTransaction(transaction);
-        return "Transaction created successfully";
+        return ResponseHandler.responseBuilder("Transaction created successfully", HttpStatus.OK, Optional.empty());
     }
 
     @PutMapping

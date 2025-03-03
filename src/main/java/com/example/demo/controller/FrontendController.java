@@ -50,4 +50,9 @@ public class FrontendController {
         return "transfer-success";
     }
 
+    @GetMapping("/transaction-form")
+    public String showTransactionPage() {
+        return "transaction";
+    }
+
 }
